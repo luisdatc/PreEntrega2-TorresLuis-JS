@@ -1,14 +1,9 @@
 //Declaro Variables
 let salirDelMenu = false;
 let cursos;
-let todosLosCursos = "";
-let nombreCurso = "";
 let precioCursos = 0;
 let consulta;
-let numeroDeCursos;
-let cursoTotal;
-let totales = 0;
-let cursosCarrito = "";
+let cart = [];
 
 //Clase Constructora del Curso
 class Curso {
@@ -17,14 +12,6 @@ class Curso {
     this.nombreCurso = nombreCurso;
     this.precioCurso = precioCurso;
     this.inicioCurso = inicioCurso;
-  }
-}
-
-//Clase constructora del carrito
-class Carrito {
-  constructor(nombreCurso, precioCurso) {
-    this.nombreCurso = nombreCurso;
-    this.precioCurso = precioCurso;
   }
 }
 
@@ -82,10 +69,15 @@ function buscarCurso(buscar) {
   }
 }
 
+//Funcion para agregar al carrito
+function addToCart(producto) {
+  cart.push(producto);
+}
+
 //Funcion para mostrar los cursos
 function seleccionarCursos() {
   alert(`
-Estos son los cursos que tenemos para que aprendas con nosotros: 
+Listado de cursos disponibles: 
 
 1 - Desarrollo WEB
 2 - JavaScript
@@ -105,7 +97,7 @@ Estos son los cursos que tenemos para que aprendas con nosotros:
   for (let i = 1; i <= cantidadCursos; i++) {
     cursos = parseInt(
       prompt(`
-    Estos son los cursos que tenemos para que aprendas con nosotros: 
+    Selecciona el que mas te guste: 
 
     1 - Desarrollo WEB
     2 - JavaScript
@@ -126,82 +118,72 @@ Estos son los cursos que tenemos para que aprendas con nosotros:
     switch (cursos) {
       case 1:
         precioCursos += curso1.precioCurso;
-        nombreCurso = "Desarrollo Web,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras.
+        addToCart(curso1.nombreCurso);
+        alert(`Agregaste el curso ${curso1.nombreCurso} al carro de compras.
         Recorda que el inicio de cursada es el dia 15/01/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 2:
         precioCursos += curso2.precioCurso;
-        nombreCurso = "JavaScript,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso2.nombreCurso);
+        alert(`Agregaste el curso ${curso2.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 20/01/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 3:
         precioCursos += 5000;
-        nombreCurso = "ReactJS,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso3.nombreCurso);
+        alert(`Agregaste el curso ${curso3.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 05/02/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 4:
         precioCursos += 5000;
-        nombreCurso = "AngularJS,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso4.nombreCurso);
+        alert(`Agregaste el curso ${curso4.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 05/02/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 5:
         precioCursos += 6000;
-        nombreCurso = "SEO,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso5.nombreCurso);
+        alert(`Agregaste el curso ${curso5.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 01/04/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 6:
         precioCursos += 10000;
-        nombreCurso = "Programacion BackEnd,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso6.nombreCurso);
+        alert(`Agregaste el curso ${curso6.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 18/02/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 7:
         precioCursos += 8000;
-        nombreCurso = "JAVA,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso7.nombreCurso);
+        alert(`Agregaste el curso ${curso7.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 20/04/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 8:
         precioCursos += 6000;
-        nombreCurso = "Python,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso8.nombreCurso);
+        alert(`Agregaste el curso ${curso8.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 20/05/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 9:
         precioCursos += 4000;
-        nombreCurso = "UX/UI Basico,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso9.nombreCurso);
+        alert(`Agregaste el curso ${curso9.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 01/03/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       case 10:
         precioCursos += 6000;
-        nombreCurso = "UX/UI Avanzado,";
-        alert(`Agregaste el curso ${nombreCurso} al carro de compras
+        addToCart(curso10.nombreCurso);
+        alert(`Agregaste el curso ${curso10.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 01/06/2023`);
-        todosLosCursos += nombreCurso;
         break;
 
       //Opcion Predeterminada
@@ -209,31 +191,26 @@ Estos son los cursos que tenemos para que aprendas con nosotros:
         alert("Ingrese una opcion del 1 al 10");
         break;
     }
-    let carrito = new Carrito(nombreCurso, precioCursos);
-
-    totales = +precioCursos;
-
-    cursosCarrito += `Curso ${i}: ${carrito.nombreCurso} con un precio de: $${precioCursos} - `;
   }
 }
 
 //FUNCION PARA COMPRAR LOS CURSOS EN EL CARRO DE COMPRAS
-function carroDeCompras() {
+function comprarcarroDeCompras() {
   consulta = prompt(
     `Desea comprar los cursos agregados al carro de compras? Indique si o no.`
   ).toLowerCase();
 
   if (consulta === "si") {
     alert(
-      `¡¡FELICIDADES!! compraste ${todosLosCursos} preparate para empezar a aprender y disfrutar`
+      `¡¡FELICIDADES!! compraste ${cart} preparate para empezar a aprender y disfrutar`
     );
-    todosLosCursos = "";
+    cart = [];
     precioCursos = 0;
   } else if (consulta == "no") {
     alert(
-      "Esperamos que vuelvas pronto y te decidas por algunos de nuestros cursos."
+      "Esperamos que vuelvas pronto y te decidas por algunos de nuestros cursos!!"
     );
-    todosLosCursos = "";
+    cart = [];
     precioCursos = 0;
   } else {
     alert("Ingresa si o no");
@@ -265,15 +242,16 @@ do {
       break;
 
     case 3:
-      console.log(cursosCarrito);
-      console.log(`Quedando en el total del carrito: ${totales}`);
-      if (todosLosCursos == "") {
+      if (cart == "") {
         alert("El carro esta vacio, agrega los cursos que mas te gusten!.");
       } else {
-        alert(
-          `En el carro de compras agregaste ${todosLosCursos} y el precio total es de: $${precioCursos}.`
+        console.log(
+          `Agregaste ${cart} al carro de compras y el precio final es: $${precioCursos}`
         );
-        carroDeCompras();
+        alert(
+          `En el carro de compras agregaste ${cart} y el precio total es de: $${precioCursos}.`
+        );
+        comprarcarroDeCompras();
       }
       break;
 
@@ -294,15 +272,3 @@ do {
       break;
   }
 } while (!salirDelMenu);
-
-// let cantidadCursos = parseInt(
-//   prompt("Ingrese la cantidad de cursos a agregar")
-// );
-
-// let cursosCarrito = "";
-// for (let i = 1; i < cantidadCursos; i++) {
-//   let carrito = new Carrito (nombreCurso, precioCursos)
-
-// cursosCarrito += `curso ${i}: ${carrito.nombreCurso} ${precioCurso} `
-// }
-// alert(cursosCarrito)

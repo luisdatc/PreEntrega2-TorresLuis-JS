@@ -70,8 +70,58 @@ function buscarCurso(buscar) {
 }
 
 //Funcion para agregar al carrito
-function addToCart(producto) {
+function agregarAlCarro(producto) {
   cart.push(producto);
+}
+
+//funciones para ordenar el carrito por precio y por orden alfabetico
+function cursoMenorMayor(curso) {
+  const menMay = [].concat(curso);
+  menMay.sort((curso01, curso02) => curso01.precioCurso - curso02.precioCurso);
+  mostrarCatalogo(menMay);
+}
+
+function cursoMayorMenor(curso) {
+  const mayMen = [].concat(curso);
+  mayMen.sort((a, b) => b.precioCurso - a.precioCurso);
+  mostrarCatalogo(mayMen);
+}
+function cursoAlfabeticoNombre(curso) {
+  const cursoAlfabetico = [].concat(curso);
+  cursoAlfabetico.sort((a, b) => {
+    if (a.nombreCurso > b.nombreCurso) {
+      return 1;
+    }
+    if (a.nombreCurso < b.nombreCurso) {
+      return -1;
+    }
+    return 0;
+  });
+  mostrarCatalogo(cursoAlfabetico);
+}
+
+//funcion para preguntar en que ordenar
+function ordenar(curso) {
+  let opcion = parseInt(
+    prompt(`
+  1 - Ordenar de menor a mayor
+  2 - Ordenar de mayor a menor
+  3 - Ordenar alfabeticamente`)
+  );
+  switch (opcion) {
+    case 1:
+      cursoMenorMayor(catalogo);
+      break;
+    case 2:
+      cursoMayorMenor(catalogo);
+      break;
+    case 3:
+      cursoAlfabeticoNombre(catalogo);
+      break;
+    default:
+      console.log(`${opcion} no es válida para ordenar`);
+      break;
+  }
 }
 
 //Funcion para mostrar los cursos
@@ -118,70 +168,70 @@ Listado de cursos disponibles:
     switch (cursos) {
       case 1:
         precioCursos += curso1.precioCurso;
-        addToCart(curso1.nombreCurso);
+        agregarAlCarro(curso1.nombreCurso);
         alert(`Agregaste el curso ${curso1.nombreCurso} al carro de compras.
         Recorda que el inicio de cursada es el dia 15/01/2023`);
         break;
 
       case 2:
         precioCursos += curso2.precioCurso;
-        addToCart(curso2.nombreCurso);
+        agregarAlCarro(curso2.nombreCurso);
         alert(`Agregaste el curso ${curso2.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 20/01/2023`);
         break;
 
       case 3:
         precioCursos += 5000;
-        addToCart(curso3.nombreCurso);
+        agregarAlCarro(curso3.nombreCurso);
         alert(`Agregaste el curso ${curso3.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 05/02/2023`);
         break;
 
       case 4:
         precioCursos += 5000;
-        addToCart(curso4.nombreCurso);
+        agregarAlCarro(curso4.nombreCurso);
         alert(`Agregaste el curso ${curso4.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 05/02/2023`);
         break;
 
       case 5:
         precioCursos += 6000;
-        addToCart(curso5.nombreCurso);
+        agregarAlCarro(curso5.nombreCurso);
         alert(`Agregaste el curso ${curso5.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 01/04/2023`);
         break;
 
       case 6:
         precioCursos += 10000;
-        addToCart(curso6.nombreCurso);
+        agregarAlCarro(curso6.nombreCurso);
         alert(`Agregaste el curso ${curso6.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 18/02/2023`);
         break;
 
       case 7:
         precioCursos += 8000;
-        addToCart(curso7.nombreCurso);
+        agregarAlCarro(curso7.nombreCurso);
         alert(`Agregaste el curso ${curso7.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 20/04/2023`);
         break;
 
       case 8:
         precioCursos += 6000;
-        addToCart(curso8.nombreCurso);
+        agregarAlCarro(curso8.nombreCurso);
         alert(`Agregaste el curso ${curso8.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 20/05/2023`);
         break;
 
       case 9:
         precioCursos += 4000;
-        addToCart(curso9.nombreCurso);
+        agregarAlCarro(curso9.nombreCurso);
         alert(`Agregaste el curso ${curso9.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 01/03/2023`);
         break;
 
       case 10:
         precioCursos += 6000;
-        addToCart(curso10.nombreCurso);
+        agregarAlCarro(curso10.nombreCurso);
         alert(`Agregaste el curso ${curso10.nombreCurso} al carro de compras
         Recorda que el inicio de cursada es el dia 01/06/2023`);
         break;
@@ -202,7 +252,7 @@ function comprarcarroDeCompras() {
 
   if (consulta === "si") {
     alert(
-      `¡¡FELICIDADES!! compraste ${cart} preparate para empezar a aprender y disfrutar`
+      `¡¡FELICIDADES!! compraste ${cart} preparate para empezar a aprender y disfrutar!`
     );
     cart = [];
     precioCursos = 0;
@@ -225,7 +275,8 @@ do {
     1 - Cursos disponibles.
     2 - Informacion General de los cursos (Precio e Inicio de Cursada).
     3 - Ver carro de compras.
-    4 - Buscar curso por titulo
+    4 - Buscar curso por titulo.
+    5 - Ordenar cursos (Precio y Orden Alfabetico).
     0 - Salir del menu.
     `)
   );
@@ -257,6 +308,10 @@ do {
 
     case 4:
       buscarCurso(catalogo);
+      break;
+
+    case 5:
+      ordenar(catalogo);
       break;
 
     case 0:

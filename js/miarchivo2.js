@@ -116,12 +116,15 @@ function ordenar(curso) {
   );
   switch (orden) {
     case 1:
+      alert("Revisa la consola!")
       cursoMenorMayor(curso);
       break;
     case 2:
+      alert("Revisa la consola!")
       cursoMayorMenor(curso);
       break;
     case 3:
+      alert("Revisa la consola!")
       cursoAlfabeticoNombre(curso);
       break;
     default:

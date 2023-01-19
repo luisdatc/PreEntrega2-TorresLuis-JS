@@ -71,7 +71,14 @@ function buscarCurso(buscar) {
 
 //Funcion para agregar al carrito
 function agregarAlCarro(producto) {
-  cart.push(producto);
+  if (cart.includes(producto.nombreCurso)) {
+    alert("El curso ya ha sido agregado al carrito");
+  } else {
+    cart.push(producto.nombreCurso);
+    precioCursos += producto.precioCurso;
+    alert(`Agregaste el curso ${producto.nombreCurso} al carro de compras.
+    Recorda que el inicio de cursada es el dia ${producto.inicioCurso}`);
+  }
 }
 
 //funciones para ordenar el carrito por precio y por orden alfabetico
@@ -80,7 +87,6 @@ function cursoMenorMayor(curso) {
   menMay.sort((curso01, curso02) => curso01.precioCurso - curso02.precioCurso);
   mostrarCatalogo(menMay);
 }
-
 function cursoMayorMenor(curso) {
   const mayMen = [].concat(curso);
   mayMen.sort((a, b) => b.precioCurso - a.precioCurso);
@@ -102,46 +108,43 @@ function cursoAlfabeticoNombre(curso) {
 
 //funcion para preguntar en que ordenar
 function ordenar(curso) {
-  let opcion = parseInt(
+  let orden = parseInt(
     prompt(`
-  1 - Ordenar de menor a mayor
-  2 - Ordenar de mayor a menor
-  3 - Ordenar alfabeticamente`)
+  1 - Ordenar por Precio de menor a mayor.
+  2 - Ordenar por precio de mayor a menor.
+  3 - Ordenar nombre de curso alfabeticamente.`)
   );
-  switch (opcion) {
+  switch (orden) {
     case 1:
-      cursoMenorMayor(catalogo);
+      cursoMenorMayor(curso);
       break;
     case 2:
-      cursoMayorMenor(catalogo);
+      cursoMayorMenor(curso);
       break;
     case 3:
-      cursoAlfabeticoNombre(catalogo);
+      cursoAlfabeticoNombre(curso);
       break;
     default:
-      console.log(`${opcion} no es válida para ordenar`);
+      console.log(`${orden} no es válida para ordenar`);
+      alert(
+        `Opcion numero ${orden} no es correcta favor de ingresar una del 1 al 3`
+      );
       break;
   }
 }
 
 //Funcion para mostrar los cursos
 function seleccionarCursos() {
-  alert(`
-Listado de cursos disponibles: 
-
-1 - Desarrollo WEB
-2 - JavaScript
-3 - ReactJS
-4 - AngularJS
-5 - SEO
-6 - Programacion BackEnd
-7 - JAVA
-8 - Python
-9 - UX/UI Basico
-10 - UX/UI Avanzado`);
-
   let cantidadCursos = parseInt(
-    prompt("Ingrese la cantidad de cursos a agregar")
+    prompt(`Cursos disponibles: 
+
+    - Desarrollo WEB - JavaScript
+    - ReactJS - AngularJS
+    - SEO - Programacion BackEnd
+    - JAVA - Python
+    - UX/UI Basico - UX/UI Avanzado
+    
+    Cuantos deseas agregar al carro de compras?`)
   );
 
   for (let i = 1; i <= cantidadCursos; i++) {
@@ -167,73 +170,43 @@ Listado de cursos disponibles:
     //Opciones
     switch (cursos) {
       case 1:
-        precioCursos += curso1.precioCurso;
-        agregarAlCarro(curso1.nombreCurso);
-        alert(`Agregaste el curso ${curso1.nombreCurso} al carro de compras.
-        Recorda que el inicio de cursada es el dia 15/01/2023`);
+        agregarAlCarro(curso1);
         break;
 
       case 2:
-        precioCursos += curso2.precioCurso;
-        agregarAlCarro(curso2.nombreCurso);
-        alert(`Agregaste el curso ${curso2.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 20/01/2023`);
+        agregarAlCarro(curso2);
         break;
 
       case 3:
-        precioCursos += 5000;
-        agregarAlCarro(curso3.nombreCurso);
-        alert(`Agregaste el curso ${curso3.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 05/02/2023`);
+        agregarAlCarro(curso3);
         break;
 
       case 4:
-        precioCursos += 5000;
-        agregarAlCarro(curso4.nombreCurso);
-        alert(`Agregaste el curso ${curso4.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 05/02/2023`);
+        agregarAlCarro(curso4);
         break;
 
       case 5:
-        precioCursos += 6000;
-        agregarAlCarro(curso5.nombreCurso);
-        alert(`Agregaste el curso ${curso5.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 01/04/2023`);
+        agregarAlCarro(curso5);
         break;
 
       case 6:
-        precioCursos += 10000;
-        agregarAlCarro(curso6.nombreCurso);
-        alert(`Agregaste el curso ${curso6.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 18/02/2023`);
+        agregarAlCarro(curso6);
         break;
 
       case 7:
-        precioCursos += 8000;
-        agregarAlCarro(curso7.nombreCurso);
-        alert(`Agregaste el curso ${curso7.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 20/04/2023`);
+        agregarAlCarro(curso7);
         break;
 
       case 8:
-        precioCursos += 6000;
-        agregarAlCarro(curso8.nombreCurso);
-        alert(`Agregaste el curso ${curso8.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 20/05/2023`);
+        agregarAlCarro(curso8);
         break;
 
       case 9:
-        precioCursos += 4000;
-        agregarAlCarro(curso9.nombreCurso);
-        alert(`Agregaste el curso ${curso9.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 01/03/2023`);
+        agregarAlCarro(curso9);
         break;
 
       case 10:
-        precioCursos += 6000;
-        agregarAlCarro(curso10.nombreCurso);
-        alert(`Agregaste el curso ${curso10.nombreCurso} al carro de compras
-        Recorda que el inicio de cursada es el dia 01/06/2023`);
+        agregarAlCarro(curso10);
         break;
 
       //Opcion Predeterminada
@@ -294,11 +267,10 @@ do {
 
     case 3:
       if (cart == "") {
-        alert("El carro esta vacio, agrega los cursos que mas te gusten!.");
-      } else {
-        console.log(
-          `Agregaste ${cart} al carro de compras y el precio final es: $${precioCursos}`
+        alert(
+          "El carro de compras esta vacio, agrega los cursos que mas te gusten!."
         );
+      } else {
         alert(
           `En el carro de compras agregaste ${cart} y el precio total es de: $${precioCursos}.`
         );
